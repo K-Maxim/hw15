@@ -22,7 +22,6 @@ CREATE TABLE colors (
     colors_id INTEGER PRIMARY KEY AUTOINCREMENT,
     colors TEXT
 );
-DROP TABLE animal_color;
 
 CREATE TABLE animal_color (
     animals_id INTEGER,
@@ -46,16 +45,15 @@ DELETE FROM colors
 WHERE colors IS NULL;
 
 INSERT INTO animal_color (animals_id, color_id)
-SELECT DISTINCT new_animals_table_TEST.name_id, colors_id
+SELECT DISTINCT new_animals_table.name_id, colors_id
 FROM animals
 INNER JOIN colors ON colors.colors = animals.color1
-INNER JOIN new_animals_table_TEST ON new_animals_table_TEST.animal_id = animals.animal_id
+INNER JOIN new_animals_table ON new_animals_table.animal_id = animals.animal_id
 UNION ALL
-SELECT DISTINCT new_animals_table_TEST.name_id, colors_id
+SELECT DISTINCT new_animals_table.name_id, colors_id
 FROM animals
 INNER JOIN colors ON colors.colors = animals.color2
-INNER JOIN new_animals_table_TEST ON new_animals_table_TEST.animal_id = animals.animal_id;
-
+INNER JOIN new_animals_table ON new_animals_table.animal_id = animals.animal_id;
 
 
 
